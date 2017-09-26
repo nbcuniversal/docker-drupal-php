@@ -25,6 +25,7 @@ RUN apt-get update && \
                            zip && \
     pecl install redis && \
     echo 'extension=redis.so' >> /etc/php/7.0/fpm/php.ini && \
+    docker-php-ext-enable redis && \
     curl -sS https://getcomposer.org/installer | php && \
     chmod +x composer.phar && \
     mv composer.phar /usr/local/bin/composer && \
