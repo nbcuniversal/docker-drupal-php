@@ -13,10 +13,11 @@ $databases['default'] = array ('default' =>
 
 $conf['file_temporary_path'] = '/tmp';
 
-$conf['memcache_stampede_semaphore'] = 3;
-$conf['memcache_stampede_wait_limit'] = 1;
-$conf['memcache_stampede_wait_time'] = 1;
-$conf['memcache_key_prefix'] = getenv('MEMCACHE_PREFIX');
-$conf['memcache_servers'] = array(
-  getenv('MEMCACHE_ENDPOINT') => 'default'
-);
+$conf['redis_client_interface'] = 'PhpRedis';
+$conf['redis_client_host'] = getenv('REDIS_HOSTNAME');
+$conf['lock_inc'] = 'sites/all/modules/contrib/redis/redis.lock.inc';
+$conf['path_inc'] = 'sites/all/modules/contrib/redis/redis.path.inc';
+$conf['cache_backends'][] = 'sites/all/modules/contrib/redis/redis.autoload.inc';
+$conf['cache_prefix'] = getenv('REDIS_PREFIX');
+$conf['cache_default_class'] = 'Redis_Cache';
+$conf['cache_class_cache_form'] = 'DrupalDatabaseCache';
