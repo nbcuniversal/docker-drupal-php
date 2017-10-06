@@ -30,7 +30,6 @@ RUN apt-get update && \
     chmod +x composer.phar && \
     mv composer.phar /usr/local/bin/composer && \
     /usr/local/bin/composer global require drush/drush && \
-    ln -s /root/.composer/vendor/drush/drush/drush /usr/local/bin/drush && \
-    drush dl registry_rebuild -y
+    ln -s /root/.composer/vendor/drush/drush/drush /usr/local/bin/drush
 
 WORKDIR /app/docroot
