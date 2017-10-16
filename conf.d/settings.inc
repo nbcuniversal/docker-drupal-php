@@ -22,3 +22,16 @@ $conf['file_temporary_path'] = '/tmp';
 //$conf['cache_prefix'] = getenv('REDIS_PREFIX');
 //$conf['cache_default_class'] = 'Redis_Cache';
 //$conf['cache_class_cache_form'] = 'DrupalDatabaseCache';
+
+/*
+  Akamai Module Config
+  https://www.drupal.org/project/akamai
+*/
+if (getenv('SITE_ENVIRONMENT') === 'prod') {
+  $conf['akamai_disabled'] = FALSE;
+  $conf['akamai_basepath'] = 'www.' . getenv('SITE_EXTERNAL_URL');
+  $conf['akamai_username'] = getenv('AKAMAI_USERNAME');
+  $conf['akamai_password'] = getenv('AKAMAI_PASSWORD');
+  $conf['akamai_domain'] = 'production';
+  $conf['akamai_action'] = 'invalidate';
+}
