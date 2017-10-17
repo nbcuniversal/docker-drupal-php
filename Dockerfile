@@ -1,8 +1,8 @@
 FROM php:7.0-fpm
 
-COPY ./conf.d/php.ini /etc/php/7.0/fpm/php.ini
-COPY ./conf.d/www.conf /etc/php-fpm.d/www.conf
-COPY ./conf.d/settings.inc /var/www/site-php/settings.inc
+COPY ./conf.d/php.ini /usr/local/etc/php/
+COPY ./conf.d/www.conf /usr/local/etc/php-fpm.d/
+COPY ./conf.d/settings.inc /var/www/site-php/
 
 RUN apt-get update && \
     apt-get install -y mysql-client \
@@ -24,7 +24,7 @@ RUN apt-get update && \
                            mysqli \
                            zip && \
     pecl install redis && \
-    echo 'extension=redis.so' >> /etc/php/7.0/fpm/php.ini && \
+    echo 'extension=redis.so' >> /usr/local/etc/php/php.ini && \
     docker-php-ext-enable redis && \
     curl -sS https://getcomposer.org/installer | php && \
     chmod +x composer.phar && \
