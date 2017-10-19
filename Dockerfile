@@ -34,4 +34,4 @@ RUN apt-get update && \
 
 WORKDIR /app/docroot
 
-CMD ["php-fpm"]
+CMD ["php-fpm", "-R"]
