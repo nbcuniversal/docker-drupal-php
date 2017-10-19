@@ -33,3 +33,5 @@ RUN apt-get update && \
     ln -s /root/.composer/vendor/drush/drush/drush /usr/local/bin/drush
 
 WORKDIR /app/docroot
+
+CMD ["php-fpm"]
