@@ -12,24 +12,34 @@ RUN apt-get update && \
                        libpng-dev \
                        unzip \
                        git \
-                       imagemagick && \
-    docker-php-ext-configure gd \
+                       imagemagick
+
+# configure php gd lib
+RUN docker-php-ext-configure gd \
       --with-jpeg-dir=/usr \
-      --with-png-dir=/usr && \
-    docker-php-ext-install gd \
+      --with-png-dir=/usr
+
+# php extensions
+RUN docker-php-ext-install gd \
                            mbstring \
                            pdo \
                            pdo_mysql \
                            pdo_pgsql \
                            mysqli \
-                           zip && \
-    pecl install redis && \
+                           zip
+
+# redis
+RUN pecl install redis && \
     echo 'extension=redis.so' >> /usr/local/etc/php/php.ini && \
-    docker-php-ext-enable redis && \
-    curl -sS https://getcomposer.org/installer | php && \
+    docker-php-ext-enable redis
+
+# composer
+RUN curl -sS https://getcomposer.org/installer | php && \
     chmod +x composer.phar && \
-    mv composer.phar /usr/local/bin/composer && \
-    /usr/local/bin/composer global require drush/drush && \
+    mv composer.phar /usr/local/bin/composer
+
+# drush
+RUN /usr/local/bin/composer global require drush/drush && \
     ln -s /root/.composer/vendor/drush/drush/drush /usr/local/bin/drush
 
 WORKDIR /app/docroot
