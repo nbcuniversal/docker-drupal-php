@@ -11,4 +11,4 @@ $databases['default'] = array ('default' =>
   ),
 );
 
-$conf['file_temporary_path'] = '/tmp';
+$conf['file_temporary_path'] = 'sites/default/tmp';
