@@ -16,7 +16,7 @@ if (extension_loaded('newrelic')) {
   $site_name = getenv('SITE_IDENTIFIER', true) ?: "dimpl";
   $site_env  = getenv('SITE_ENVIRONMENT', true) ?: "local";
 
-  if ($site_env === "prod") {
+  if ($site_env === "prod" || $site_env === "stg") {
     newrelic_set_appname($site_name . $site_env, "", true);
   }
 }
