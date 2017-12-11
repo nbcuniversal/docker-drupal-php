@@ -32,8 +32,7 @@ ENV NR_INSTALL_KEY=
 RUN wget -O- https://download.newrelic.com/548C16BF.gpg | apt-key add - && \
    echo 'deb http://apt.newrelic.com/debian/ newrelic non-free' | tee /etc/apt/sources.list.d/newrelic.list && \
    apt-get update && \
-   DEBIAN_FRONTEND=noninteractive apt-get -y install newrelic-php5 && \
-   newrelic-install install
+   DEBIAN_FRONTEND=noninteractive apt-get -y install newrelic-php5
 
 # redis and cleanup
 RUN pecl install redis && \
@@ -57,7 +56,6 @@ COPY ./conf.d/php.ini /usr/local/etc/php/
 COPY ./conf.d/www.conf /usr/local/etc/php-fpm.d/
 COPY ./conf.d/settings.inc /var/www/site-php/
 COPY ./conf.d/opcache.ini /usr/local/etc/php/conf.d/
-COPY ./conf.d/newrelic.ini /usr/local/etc/php/conf.d/
 COPY ./conf.d/entrypoint.sh /
 
 WORKDIR /app/docroot

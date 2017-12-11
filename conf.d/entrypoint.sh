@@ -2,10 +2,18 @@
 
 # Drupal Docker PHP simple entrypoint script..
 
-# TODO: Disable NewRelic plugin on anything outisde STG/PROD.
+# Only enable New Relic on Production and Staging environments
+if [ "$SITE_ENVIRONMENT" = "prod" ] || [ "$SITE_ENVIRONMENT" = "stg" ]
+then
+newrelic-install install
 
-# Add our NewRelic API key from NR_KEY env variable.
-echo "newrelic.license=\"${NR_INSTALL_KEY}\"" >> /usr/local/etc/php/conf.d/newrelic.ini
+cat <<EOF > /usr/local/etc/php/conf.d/newrelic.ini
+extension = "newrelic.so"
+newrelic.license = ${NR_INSTALL_KEY}
+newrelic.appname = ${SITE_IDENTIFIER}${SITE_ENVIRONMENT}
+EOF
+
+fi
 
 # Start PHP FPM
 exec php-fpm
