@@ -36,7 +36,6 @@ RUN wget -O- https://download.newrelic.com/548C16BF.gpg | apt-key add - && \
 
 # redis and cleanup
 RUN pecl install redis && \
-    echo 'extension=redis.so' >> /usr/local/etc/php/conf.d/redis.ini && \
     docker-php-ext-enable redis && \
     rm -fr /tmp/* /var/lib/apt/lists/* /var/tmp/* && \
     apt-get autoremove -y && \
