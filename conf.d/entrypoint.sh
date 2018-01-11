@@ -14,6 +14,6 @@ newrelic.appname = ${SITE_IDENTIFIER}${SITE_ENVIRONMENT}
 EOF
 
 fi
-
+touch /var/log/fpm-php.www.log && chmod 777 /var/log/fpm-php.www.log
 # Start PHP FPM
 exec php-fpm
