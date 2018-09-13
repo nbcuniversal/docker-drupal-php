@@ -6,6 +6,7 @@ RUN apt-get update && \
                        libpng12-dev \
                        libpq-dev \
                        libpng-dev \
+                       libmcrypt-dev \
                        unzip \
                        git \
                        imagemagick \
@@ -24,7 +25,8 @@ RUN docker-php-ext-install gd \
                            pdo_mysql \
                            pdo_pgsql \
                            mysqli \
-                           zip
+                           zip \
+                           mcrypt
 
 # newrelic
 ENV NR_INSTALL_SILENT=true
